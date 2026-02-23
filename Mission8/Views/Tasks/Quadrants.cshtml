@@ -4,7 +4,46 @@
              III: Not Important/Urgent, IV: Not Important/Not Urgent). Only show non-completed tasks.
              Include Update and Delete functionality for each task.
 *@
+@model IEnumerable<Task>
+
 @{
-    ViewData["Title"] = "Quadrants";
+    ViewData["Title"] = "Covey Time Management Matrix";
 }
 
+<div class="container">
+    <h1 class="text-center mb-4">Task Quadrants</h1>
+
+    <div class="row g-4">
+        @for (int i = 1; i <= 4; i++)
+        {
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header @GetQuadrantColor(i) text-white">
+                        <h4 class="mb-0">@GetQuadrantTitle(i)</h4>
+                    </div>
+                    <div class="card-body">
+                        @await Html.PartialAsync("_TaskTable", Model.Where(x => x.Quadrant == i && !x.Completed))
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@functions {
+    string GetQuadrantTitle(int q) => q switch {
+        1 => "I: Urgent & Important",
+        2 => "II: Not Urgent & Important",
+        3 => "III: Urgent & Not Important",
+        4 => "IV: Not Urgent & Not Important",
+        _ => ""
+    };
+
+    string GetQuadrantColor(int q) => q switch {
+        1 => "bg-danger",
+        2 => "bg-primary",
+        3 => "bg-warning",
+        4 => "bg-secondary",
+        _ => ""
+    };
+}
