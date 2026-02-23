@@ -6,6 +6,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using Mission8.Models;
+using MissionTask = Mission8.Models.Task;
 
 namespace Mission8.Data
 {
@@ -15,7 +16,7 @@ namespace Mission8.Data
         {
         }
 
-        public DbSet<Task> Tasks => Set<Task>();
+        public DbSet<MissionTask> Tasks => Set<MissionTask>();
         public DbSet<Category> Categories => Set<Category>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -27,8 +28,8 @@ namespace Mission8.Data
                 new Category { CategoryId = 4, CategoryName = "Church" }
             );
 
-            modelBuilder.Entity<Task>().HasData(
-                new Task
+            modelBuilder.Entity<MissionTask>().HasData(
+                new MissionTask
                 {
                     TaskId = 1,
                     TaskName = "Finish Mission 8 database setup",
@@ -37,7 +38,7 @@ namespace Mission8.Data
                     CategoryId = 2,
                     Completed = false
                 },
-                new Task
+                new MissionTask
                 {
                     TaskId = 2,
                     TaskName = "Plan weekly work priorities",
@@ -46,7 +47,7 @@ namespace Mission8.Data
                     CategoryId = 3,
                     Completed = false
                 },
-                new Task
+                new MissionTask
                 {
                     TaskId = 3,
                     TaskName = "Prepare family activity",

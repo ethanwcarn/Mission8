@@ -4,17 +4,18 @@
 // =============================================================================
 
 using Mission8.Models;
+using MissionTask = Mission8.Models.Task;
 
 namespace Mission8.Data
 {
     public interface ITaskRepository
     {
-        IQueryable<Task> Tasks { get; }
+        IQueryable<MissionTask> Tasks { get; }
 
-        IEnumerable<Task> GetIncompleteTasks();
-        Task? GetTaskById(int taskId);
-        void AddTask(Task task);
-        void UpdateTask(Task task);
+        IEnumerable<MissionTask> GetIncompleteTasks();
+        MissionTask? GetTaskById(int taskId);
+        void AddTask(MissionTask task);
+        void UpdateTask(MissionTask task);
         void DeleteTask(int taskId);
         void MarkTaskComplete(int taskId);
         void SaveTask();

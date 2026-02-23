@@ -5,6 +5,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using Mission8.Models;
+using MissionTask = Mission8.Models.Task;
 
 namespace Mission8.Data
 {
@@ -17,9 +18,9 @@ namespace Mission8.Data
             _context = context;
         }
 
-        public IQueryable<Task> Tasks => _context.Tasks.Include(t => t.Category);
+        public IQueryable<MissionTask> Tasks => _context.Tasks.Include(t => t.Category);
 
-        public IEnumerable<Task> GetIncompleteTasks()
+        public IEnumerable<MissionTask> GetIncompleteTasks()
         {
             return _context.Tasks
                 .Include(t => t.Category)
@@ -28,18 +29,18 @@ namespace Mission8.Data
                 .ThenBy(t => t.DueDate);
         }
 
-        public Task? GetTaskById(int taskId)
+        public MissionTask? GetTaskById(int taskId)
         {
             return _context.Tasks.FirstOrDefault(t => t.TaskId == taskId);
         }
 
-        public void AddTask(Task task)
+        public void AddTask(MissionTask task)
         {
             _context.Tasks.Add(task);
             SaveTask();
         }
 
-        public void UpdateTask(Task task)
+        public void UpdateTask(MissionTask task)
         {
             _context.Tasks.Update(task);
             SaveTask();
