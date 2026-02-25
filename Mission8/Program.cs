@@ -1,9 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+using Mission8.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // =============================================================================
 // JARED - Assignment #1: Configure all needed settings/services/endpoints here
 // (DbContext, Repository registrations, etc.)
 // =============================================================================
+
+builder.Services.AddDbContext<Mission8Context>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("Mission8Connection")
+                      ?? "Data Source=Mission8.db"));
+
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -24,6 +34,13 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+
+// Ensure the database and seed data exist on startup for local development.
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<Mission8Context>();
+    dbContext.Database.EnsureCreated();
+}
 
 app.MapControllerRoute(
     name: "default",
