@@ -1,4 +1,4 @@
-@model IEnumerable<Task>
+@model IEnumerable<Mission8.Models.Task>
 
 <div class="table-responsive">
     <table class="table table-hover table-sm">
@@ -20,15 +20,15 @@
                 <td>
                     <div class="btn-group" role="group">
                         @* Edit Link *@
-                        <a asp-controller="Home" asp-action="EditTask" asp-route-id="@task.TaskId" 
+                        <a asp-controller="Tasks" asp-action="AddEdit" asp-route-id="@task.TaskId"
                            class="btn btn-outline-primary btn-sm">Edit</a>
-                            
+
                         @* Delete Link *@
-                        <a asp-controller="Home" asp-action="DeleteTask" asp-route-id="@task.TaskId" 
+                        <a asp-controller="Tasks" asp-action="DeleteTask" asp-route-id="@task.TaskId"
                            class="btn btn-outline-danger btn-sm">Delete</a>
 
                         @* Complete Action (POST) *@
-                        <form asp-action="MarkComplete" asp-route-id="@task.TaskId" method="post" class="d-inline">
+                        <form asp-controller="Tasks" asp-action="MarkComplete" asp-route-id="@task.TaskId" method="post" class="d-inline">
                             <button type="submit" class="btn btn-outline-success btn-sm">Done</button>
                         </form>
                     </div>

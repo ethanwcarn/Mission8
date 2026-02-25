@@ -8,7 +8,7 @@
     ViewData["Title"] = "Add/Edit Task";
 }
 
-@model Task
+@model Mission8.Models.Task
 
 @{
     ViewData["Title"] = "Add / Edit Task";
@@ -28,9 +28,9 @@
                 <!-- Task (Required) -->
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <label asp-for="Task" class="form-label"></label>
-                        <input asp-for="Task" class="form-control" />
-                        <span asp-validation-for="Task" class="text-danger"></span>
+                        <label asp-for="TaskName" class="form-label"></label>
+                        <input asp-for="TaskName" class="form-control" />
+                        <span asp-validation-for="TaskName" class="text-danger"></span>
                     </div>
                 </div>
 
