@@ -2,7 +2,47 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@{
+    ViewData["Title"] = "Task Manager";
+}
+
+<div class="container mt-5">
+
+    <!-- Welcome Section -->
+    <div class="row mb-5">
+        <div class="col text-center">
+            <h1 class="display-4">Welcome to Your Time Management Matrix</h1>
+            <p class="lead">
+                Organize your tasks using Stephen Covey’s Quadrant system.
+            </p>
+        </div>
+    </div>
+
+    <!-- Button Section -->
+    <div class="row justify-content-center text-center">
+
+        <!-- View Tasks Button -->
+        <div class="col-md-5 mb-3">
+            <div class="d-grid">
+                <a asp-controller="Tasks"
+                   asp-action="Quadrants"
+                   class="btn btn-primary btn-lg p-4">
+                    View Tasks
+                </a>
+            </div>
+        </div>
+
+        <!-- Add Task Button -->
+        <div class="col-md-5 mb-3">
+            <div class="d-grid">
+                <a asp-controller="Tasks"
+                   asp-action="AddEdit"
+                   class="btn btn-success btn-lg p-4">
+                    Add Task
+                </a>
+            </div>
+        </div>
+
+    </div>
+
 </div>

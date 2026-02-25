@@ -8,3 +8,98 @@
     ViewData["Title"] = "Add/Edit Task";
 }
 
+@model Task
+
+@{
+    ViewData["Title"] = "Add / Edit Task";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <h2 class="mb-4 text-center">Add / Edit Task</h2>
+
+            <form method="post">
+
+                @* Hidden ID for editing *@
+                <input type="hidden" asp-for="TaskId" />
+
+                <!-- Task (Required) -->
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label asp-for="Task" class="form-label"></label>
+                        <input asp-for="Task" class="form-control" />
+                        <span asp-validation-for="Task" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Due Date -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="DueDate" class="form-label"></label>
+                        <input asp-for="DueDate" type="date" class="form-control" />
+                    </div>
+                </div>
+
+                <!-- Quadrant (Required) -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="Quadrant" class="form-label"></label>
+                        <select asp-for="Quadrant" class="form-select">
+                            <option value="">Select Quadrant</option>
+                            <option value="1">Quadrant I (Important / Urgent)</option>
+                            <option value="2">Quadrant II (Important / Not Urgent)</option>
+                            <option value="3">Quadrant III (Not Important / Urgent)</option>
+                            <option value="4">Quadrant IV (Not Important / Not Urgent)</option>
+                        </select>
+                        <span asp-validation-for="Quadrant" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Category (Dropdown from DB) -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label asp-for="CategoryId" class="form-label"></label>
+                        <select asp-for="CategoryId" class="form-select">
+                            <option value="">Select Category</option>
+                            @foreach (var c in ViewBag.Categories)
+                            {
+                                <option value="@c.CategoryId">
+                                    @c.CategoryName
+                                </option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Completed -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input asp-for="Completed" class="form-check-input" />
+                            <label asp-for="Completed" class="form-check-label"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary me-2">
+                            Save Task
+                        </button>
+
+                        <a asp-controller="Tasks"
+                           asp-action="Quadrants"
+                           class="btn btn-secondary">
+                            Cancel
+                        </a>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
